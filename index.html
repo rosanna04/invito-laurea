@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Invito Laurea di Rosanna</title>
+
+<!-- =====================================================
+     FONT ELEGANTI
+     ===================================================== -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* =====================================================
+   COLORI E VARIABILI
+   ===================================================== */
+:root {
+    --rosso-scuro: #6e0000;
+    --rosso-bordeaux: #721c24;
+    --rosso: #8e030a;
+    --rosso-chiaro: #a50912;
+    --rosso-flap: #b51018;
+    --crema-caldo: #fcf9f5;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 100%; height: 100%; }
+
+body {
+    background: #e5e0db;
+    font-family: 'Montserrat', sans-serif;
+    overflow: hidden;
+    display: flex; justify-content: center; align-items: center;
+    touch-action: manipulation;
+}
+
+.hint {
+    position: absolute; top: 7%; left: 0; width: 100%; text-align: center;
+    color: #666; font-size: 16px; font-weight: 600; letter-spacing: 1px;
+    z-index: 200; animation: pulse 2s infinite; transition: opacity .4s ease;
+}
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .45; } }
+
+/* =====================================================
+   SCENA E BUSTA
+   ===================================================== */
+.envelope-scene { position: relative; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center; }
+
+.envelope-wrapper {
+    position: relative;
+    width: min(320px, calc(100vw - 30px));
+    height: min(460px, calc(100vh - 120px));
+    aspect-ratio: 320 / 460;
+    z-index: 10; overflow: visible; perspective: 1400px;
+    transition: opacity .7s ease;
+}
+
+.envelope-back {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    background: linear-gradient(145deg, #98050d 0%, #720007 100%);
+    border-radius: 5px; box-shadow: 0 18px 38px rgba(0,0,0,.30); z-index: 1;
+}
+
+/* =====================================================
+   INVITO INTERNO E GRAFICA
+   ===================================================== */
+.card {
+    position: absolute;
+    top: 3.26%; left: 4.69%; width: 90.62%; height: 93.48%;
+    transform: translateX(0) scale(1); transform-origin: center center;
+    z-index: 2; cursor: pointer; box-shadow: 0 0 8px rgba(0,0,0,.10);
+    transition: transform 1.15s cubic-bezier(.4,0,.2,1), box-shadow 1s ease;
+}
+
+.card-inner {
+    position: relative; width: 100%; height: 100%;
+    background: var(--crema-caldo); border-radius: 4px;
+    overflow: hidden; box-shadow: inset 0 0 15px rgba(0,0,0,0.03);
+}
+
+/* Cornici */
+.geom-tl { position: absolute; top: 15px; left: 15px; width: 70px; height: 70px; border-top: 1px solid var(--rosso-bordeaux); border-left: 1px solid var(--rosso-bordeaux); z-index: 5; }
+.geom-tl::before { content: "✦"; position: absolute; top: -9px; left: -8px; color: var(--rosso-bordeaux); font-size: 14px; }
+.geom-tl .dot-h { position: absolute; top: -3px; right: -3px; width: 5px; height: 5px; background: var(--rosso-bordeaux); transform: rotate(45deg); }
+.geom-tl .dot-v { position: absolute; bottom: -3px; left: -3px; width: 5px; height: 5px; background: var(--rosso-bordeaux); transform: rotate(45deg); }
+
+.geom-br { position: absolute; bottom: 15px; right: 15px; width: 70px; height: 70px; border-bottom: 1px solid var(--rosso-bordeaux); border-right: 1px solid var(--rosso-bordeaux); z-index: 5; }
+.geom-br::before { content: "✦"; position: absolute; bottom: -10px; right: -8px; color: var(--rosso-bordeaux); font-size: 14px; }
+.geom-br .dot-h { position: absolute; bottom: -3px; left: -3px; width: 5px; height: 5px; background: var(--rosso-bordeaux); transform: rotate(45deg); }
+.geom-br .dot-v { position: absolute; top: -3px; right: -3px; width: 5px; height: 5px; background: var(--rosso-bordeaux); transform: rotate(45deg); }
+
+/* Fiori */
+.floral { position: absolute; z-index: 10; filter: drop-shadow(2px 4px 4px rgba(0,0,0,0.25)); }
+.floral-tr { top: 0; right: 0; width: 100px; height: 100px; }
+.floral-tr .f1 { position: absolute; top: -15px; right: -10px; font-size: 60px; }
+.floral-tr .f2 { position: absolute; top: 25px; right: -20px; font-size: 50px; }
+.floral-tr .f3 { position: absolute; top: -10px; right: 35px; font-size: 45px; }
+.floral-tr .l1 { position: absolute; top: 40px; right: 25px; font-size: 35px; transform: rotate(50deg); }
+.floral-tr .l2 { position: absolute; top: 60px; right: 5px; font-size: 25px; transform: rotate(110deg); }
+
+.floral-bl { bottom: 0; left: 0; width: 100px; height: 100px; }
+.floral-bl .f1 { position: absolute; bottom: -15px; left: -10px; font-size: 65px; }
+.floral-bl .f2 { position: absolute; bottom: 25px; left: -20px; font-size: 50px; transform: scaleX(-1); }
+.floral-bl .f3 { position: absolute; bottom: -10px; left: 40px; font-size: 45px; }
+.floral-bl .l1 { position: absolute; bottom: 40px; left: 35px; font-size: 35px; transform: rotate(-130deg); }
+.floral-bl .l2 { position: absolute; bottom: 10px; left: 70px; font-size: 25px; transform: rotate(-90deg); }
+
+/* --- TESTO AGGIORNATO --- */
+.card-content {
+    position: relative; z-index: 15; height: 100%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding-top: 15px;
+}
+
+.hat-diploma { position: relative; height: 70px; width: 100%; margin-top: 5px; margin-bottom: 25px; }
+.diploma { position: absolute; font-size: 45px; top: 25px; left: 50%; transform: translateX(-40%) rotate(-10deg); filter: drop-shadow(1px 2px 2px rgba(0,0,0,0.15)); }
+.hat { position: absolute; font-size: 65px; top: 0; left: 50%; transform: translateX(-55%); z-index: 2; filter: drop-shadow(2px 4px 4px rgba(0,0,0,0.3)); }
+
+.pre-text { font-family: 'Montserrat', sans-serif; font-size: 8px; font-weight: 600; color: #555; letter-spacing: 1px; margin-bottom: 12px; text-align: center; }
+.title-main { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 400; color: var(--rosso-bordeaux); text-align: center; margin-bottom: 5px; letter-spacing: 1px;}
+.title-sub { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 400; color: var(--rosso-bordeaux); text-align: center; letter-spacing: 1px; line-height: 1.1;}
+.name {
+    font-family: 'Great Vibes', cursive; 
+    font-size: 48px; 
+    color: var(--rosso-bordeaux);
+    margin-top: 0px; 
+    margin-bottom: 10px; text-align: center;
+    text-shadow: 2px 2px 0px var(--crema-caldo), -2px -2px 0px var(--crema-caldo), 2px -2px 0px var(--crema-caldo), -2px 2px 0px var(--crema-caldo);
+    position: relative; z-index: 5;
+}
+
+.details-container { width: 100%; display: flex; flex-direction: column; align-items: flex-end; padding-right: 30px; margin-top: 5px; margin-bottom: 15px; }
+.details-container .date-time { font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700; color: var(--rosso-bordeaux); text-align: right; margin-bottom: 12px; line-height: 1.4; }
+.details-container .location { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 500; color: #444; text-align: right; line-height: 1.5; }
+
+/* =====================================================
+   ALETTE E SIGILLO
+   ===================================================== */
+.flap-left { position: absolute; inset: 0; width: 100%; height: 100%; background: linear-gradient(135deg, #a50912 0%, #850008 100%); clip-path: polygon(0 0, 50% 50%, 0 100%); z-index: 4; }
+.flap-bottom { position: absolute; inset: 0; width: 100%; height: 100%; background: linear-gradient(180deg, #a50912 0%, #800007 100%); clip-path: polygon(0 100%, 50% 50%, 100% 100%); z-index: 5; }
+.flap-top { position: absolute; inset: 0; width: 100%; height: 100%; background: linear-gradient(145deg, #b51018 0%, #970008 100%); clip-path: polygon(0 0, 100% 0, 50% 50%); z-index: 6; }
+.flap-right-wrapper { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 8; cursor: pointer; transform-origin: right center; transform-style: preserve-3d; transition: transform 1s cubic-bezier(.4,0,.2,1), z-index 0s 0s; }
+.flap-right-shape { position: absolute; inset: 0; width: 100%; height: 100%; background: linear-gradient(225deg, #a50912 0%, #820008 100%); clip-path: polygon(100% 0, 50% 50%, 100% 100%); }
+
+.seal {
+    position: absolute; top: 50%; left: 50%; width: 70px; height: 70px; transform: translate(-50%,-50%);
+    background: radial-gradient(circle at 32% 28%, #fff1a8 0%, #e2bd5a 28%, #b78929 62%, #654609 100%);
+    border-radius: 50%; box-shadow: inset 2px 2px 6px rgba(255,245,180,.9), inset -3px -3px 7px rgba(70,45,5,.75), 2px 5px 12px rgba(0,0,0,.45);
+    display: flex; justify-content: center; align-items: center; color: #5c3e03; font-family: 'Playfair Display', serif; font-size: 27px; font-weight: bold;
+    z-index: 30; transition: opacity .35s, transform .4s;
+}
+.seal::before { content: ""; position: absolute; width: 52px; height: 52px; border: 2px solid rgba(130,95,25,.45); border-radius: 50%; box-shadow: inset 1px 1px 4px rgba(0,0,0,.4); }
+
+/* =====================================================
+   ANIMAZIONI APERTURA E FOCUS
+   ===================================================== */
+.wrapper-open .flap-right-wrapper { transform: rotateY(180deg); z-index: 1; transition: transform 1s cubic-bezier(.4,0,.2,1), z-index 0s 0.25s; }
+.wrapper-open .seal { opacity: 0; transform: translate(-50%,-50%) scale(.75); }
+.wrapper-open .card { transform: translateX(75px) scale(1); z-index: 2; box-shadow: 0 18px 40px rgba(0,0,0,.25); transition: transform .8s cubic-bezier(.4,0,.2,1) .4s, box-shadow .8s ease .4s; }
+
+.focus-mode { overflow: hidden; }
+.focus-mode .envelope-wrapper { z-index: 400; }
+.focus-mode .envelope-back, .focus-mode .flap-left, .focus-mode .flap-bottom, .focus-mode .flap-top, .focus-mode .flap-right-wrapper { opacity: 0; transition: opacity .55s ease; }
+.focus-mode .card { transform: translateX(0) scale(var(--focus-scale)); z-index: 500; border-radius: 3px; box-shadow: 0 25px 80px rgba(0,0,0,.35); transition: transform 1.2s cubic-bezier(.22,1,.36,1), box-shadow 1.2s ease; }
+
+.focus-background { position: fixed; inset: 0; background: #e5e0db; opacity: 0; pointer-events: none; z-index: 300; transition: opacity .7s ease; }
+.focus-mode .focus-background { opacity: 1; }
+
+.tap-hint {
+    position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%);
+    background-color: var(--rosso-scuro); color: white; padding: 12px 24px;
+    border-radius: 30px; font-size: 14px; font-weight: 700; letter-spacing: 0.5px;
+    box-shadow: 0 5px 15px rgba(110, 0, 0, 0.4); z-index: 600; opacity: 0; pointer-events: none;
+    transition: opacity 0.5s ease 0.8s; animation: bounceUp 2s infinite;
+}
+body.focus-mode:not(.rsvp-open) .tap-hint { opacity: 1; }
+@keyframes bounceUp { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(-8px); } }
+
+/* =====================================================
+   MODAL RSVP E RESPONSIVE
+   ===================================================== */
+#rsvp-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.85); backdrop-filter: blur(5px); display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity .4s ease; z-index: 999; padding: 20px; }
+#rsvp-overlay.show { opacity: 1; pointer-events: auto; }
+.rsvp-box { background: white; width: 100%; max-width: 350px; padding: 25px; border-radius: 12px; text-align: center; position: relative; transform: translateY(20px); transition: transform .4s ease; }
+#rsvp-overlay.show .rsvp-box { transform: translateY(0); }
+.chiudi-btn { position: absolute; top: 10px; right: 15px; font-size: 28px; color: #888; cursor: pointer; border: none; background: none; }
+.rsvp-box h2 { color: var(--rosso-scuro); font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 15px; }
+.indicazioni-box { background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #e8eaed; }
+.indicazioni-box p { font-size: 13px; color: #444; margin-bottom: 12px; line-height: 1.5; }
+.map-btn { display: inline-flex; align-items: center; justify-content: center; background: #e8f0fe; color: #1a73e8; text-decoration: none; padding: 10px; border-radius: 6px; font-size: 13px; font-weight: 700; width: 100%; }
+form { display: flex; flex-direction: column; gap: 12px; text-align: left; }
+input, select { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; font-family: inherit; }
+input:focus, select:focus { border-color: var(--rosso-scuro); outline: none; }
+button[type="submit"] { background: var(--rosso-scuro); color: white; border: none; padding: 14px; font-size: 15px; font-weight: 700; border-radius: 6px; cursor: pointer; margin-top: 5px; }
+
+@media (max-width: 430px) { .envelope-wrapper { width: calc(100vw - 28px); height: calc(100vh - 110px); } .seal { width: 64px; height: 64px; } .seal::before { width: 48px; height: 48px; } }
+@media (max-height: 650px) { .hint { top: 3%; font-size: 14px; } .envelope-wrapper { height: calc(100vh - 90px); } .tap-hint { bottom: 10px; } }
+</style>
+</head>
+
+<body>
+
+<div class="focus-background"></div>
+<div class="tap-hint">👆 Tocca l'invito per rispondere</div>
+<p class="hint" id="hint">Tocca il sigillo per aprire</p>
+
+<div class="envelope-scene">
+    <div class="envelope-wrapper" id="envelope">
+        
+        <div class="envelope-back"></div>
+
+        <!-- INVITO AGGIORNATO -->
+        <div class="card" id="card" onclick="apriRSVP(event)">
+            <div class="card-inner">
+                
+                <div class="geom-tl"><div class="dot-h"></div><div class="dot-v"></div></div>
+                <div class="geom-br"><div class="dot-h"></div><div class="dot-v"></div></div>
+
+                <div class="floral floral-tr">
+                    <span class="l1">🌿</span><span class="l2">🌿</span>
+                    <span class="f1">🌹</span><span class="f2">🌹</span><span class="f3">🌹</span>
+                </div>
+                <div class="floral floral-bl">
+                    <span class="l1">🌿</span><span class="l2">🌿</span>
+                    <span class="f1">🌹</span><span class="f2">🌹</span><span class="f3">🌹</span>
+                </div>
+
+                <div class="card-content">
+                    <div class="hat-diploma">
+                        <span class="diploma">📜</span>
+                        <span class="hat">🎓</span>
+                    </div>
+                    
+                    <div class="pre-text">HO IL PIACERE DI INVITARTI ALLA MIA</div>
+                    <div class="pre-text" style="margin-bottom: 5px;">FESTA DI LAUREA</div>
+                    <div class="title-main">LAUREA IN</div>
+                    <div class="title-sub">INGEGNERIA<br>GESTIONALE</div>
+                    <div class="name">Rosanna</div>
+                    
+                    <div class="details-container">
+                        <!-- Data e orario -->
+                        <div class="date-time">
+                            3 OTTOBRE 2026<br>ORE 20:00
+                        </div>
+                        <!-- Ristorante e via -->
+                        <div class="location">
+                            RISTORANTE BUTTERFLY<br>VIA CIFELLI, 10 - TRECASE (NA)
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="flap-left"></div>
+        <div class="flap-bottom"></div>
+        <div class="flap-top"></div>
+        <div class="flap-right-wrapper" id="rightFlap" onclick="apriBusta()">
+            <div class="flap-right-shape"></div>
+            <!-- Sigillo vuoto -->
+            <div class="seal"></div>
+        </div>
+
+    </div>
+</div>
+
+<!-- MODULO RSVP -->
+<div id="rsvp-overlay">
+    <div class="rsvp-box">
+        <button class="chiudi-btn" onclick="chiudiRSVP()">×</button>
+        <h2>Conferma Presenza</h2>
+        
+        <div class="indicazioni-box">
+            <p>📍 <strong>Ristorante Butterfly</strong><br>Via Cifelli, 10 - 80040 Trecase (NA)</p>
+            <a href="https://maps.google.com/?q=Ristorante+Butterfly+Via+Cifelli+10+Trecase+NA" target="_blank" class="map-btn">
+                📍 Ottieni indicazioni su Maps
+            </a>
+        </div>
+
+        <form action="https://formsubmit.co/ros.petecca@gmail.com" method="POST">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_subject" value="Conferma Partecipazione Laurea">
+            <input type="text" name="Nome_e_Cognome" placeholder="Il tuo Nome e Cognome" required>
+            
+            <select name="Partecipazione" required>
+                <option value="" disabled selected>Parteciperai?</option>
+                <option value="Sì, confermo la presenza">Sì, ci sarò con piacere</option>
+                <option value="No, non posso partecipare">Purtroppo non potrò esserci</option>
+            </select>
+            
+            <button type="submit">Invia Conferma</button>
+        </form>
+    </div>
+</div>
+
+<script>
+let bustaAperta = false;
+let focusAttivo = false;
+
+function apriBusta() {
+    if (bustaAperta) return;
+    bustaAperta = true;
+    const envelope = document.getElementById("envelope");
+    const hint = document.getElementById("hint");
+    envelope.classList.add("wrapper-open");
+    setTimeout(function() { hint.innerText = "Attendi..."; }, 900);
+    setTimeout(function() { attivaFocus(); }, 1500);
+}
+
+function attivaFocus() {
+    if (focusAttivo) return;
+    focusAttivo = true;
+    const card = document.getElementById("card");
+    const hint = document.getElementById("hint");
+    const altezzaSchermo = window.innerHeight;
+    const altezzaCard = card.getBoundingClientRect().height;
+    
+    let scala = (altezzaSchermo * 0.92) / altezzaCard;
+    scala = Math.max(1, Math.min(scala, 2.5));
+    document.documentElement.style.setProperty("--focus-scale", scala);
+
+    hint.style.opacity = "0";
+    document.body.classList.add("focus-mode");
+}
+
+function apriRSVP(event) {
+    if (!focusAttivo) return;
+    event.stopPropagation();
+    document.body.classList.add("rsvp-open");
+    document.getElementById("rsvp-overlay").classList.add("show");
+}
+
+function chiudiRSVP() {
+    document.body.classList.remove("rsvp-open");
+    document.getElementById("rsvp-overlay").classList.remove("show");
+}
+
+document.getElementById("rsvp-overlay").addEventListener("click", function(event) {
+    if (event.target === this) chiudiRSVP();
+});
+
+document.getElementById("card").addEventListener("click", function(event) {
+    if (!focusAttivo) event.stopPropagation();
+});
+</script>
+
+</body>
+</html>
